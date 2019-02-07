@@ -18,4 +18,17 @@
   </li>
 </ul>
 
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+
+  <mat-form-field>
+    <input matInput [formControl]="audioFormControl" placeholder="Favorite food" value="Sushi">
+
+  </mat-form-field>
+
+  <label for="avatar">Choose a profile picture:</label>
+  <input type="file" ngModel name="audio-file">
+  <input type="submit" >
+</form>
+
+
 <router-outlet></router-outlet>
