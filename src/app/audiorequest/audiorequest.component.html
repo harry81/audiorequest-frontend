@@ -1,24 +1,11 @@
 <label class="audio-upload-container btn btn-bwm">
   <span>Select Audio</span>
   <input #audioInput
-         type="file" accept="audio/wav, audio/flac"
+         type="file" accept="audio/*"
          (change)="processFile(audioInput)">
 </label>
 
-<p>Value: {{ name }}</p>
-
-
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-
-  <mat-form-field>
-    <input matInput [formControl]="audioFormControl" placeholder="Favorite food" value="Sushi">
-
-  </mat-form-field>
-
-  <label for="avatar">Choose a profile picture:</label>
-  <input type="file" ngModel name="audio-file">
-  <input type="submit" >
-</form>
+<p>Value2: {{ name }}</p>
 
 <p>
   audiorequest works!

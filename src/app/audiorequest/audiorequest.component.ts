@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormControl, Validators} from '@angular/forms';
 import { AudioService } from '../audio.service';
 
+
 class AudioSnippet {
     constructor(public src: string, public file: File) {}
 }
@@ -20,7 +21,9 @@ export class AudiorequestComponent implements OnInit {
         Validators.email,
     ]);
 
-    constructor(private audioService: AudioService){}
+    constructor(private audioService: AudioService){
+
+    }
 
     selectedFile: AudioSnippet;
 
@@ -33,6 +36,7 @@ export class AudiorequestComponent implements OnInit {
     processFile(audioInput: any) {
         const file: File = audioInput.files[0];
         const reader = new FileReader();
+        this.name = 'start';
 
         reader.addEventListener('load', (event: any) => {
 
@@ -40,7 +44,6 @@ export class AudiorequestComponent implements OnInit {
 
             this.audioService.uploadFile(this.selectedFile.file).subscribe(
                 (res) => {
-                    console.log(res);
                     this.name = res.script;
                 },
                 (err) => {

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "hsf-frontend-angular": {
+    "stt-frontend": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/hsf-frontend-angular",
+            "outputPath": "dist/stt-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -61,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hsf-frontend-angular:build"
+            "browserTarget": "stt-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hsf-frontend-angular:build:production"
+              "browserTarget": "stt-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hsf-frontend-angular:build"
+            "browserTarget": "stt-frontend:build"
           }
         },
         "test": {
@@ -106,7 +106,7 @@
         }
       }
     },
-    "hsf-frontend-angular-e2e": {
+    "stt-frontend-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -115,11 +115,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hsf-frontend-angular:serve"
+            "devServerTarget": "stt-frontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hsf-frontend-angular:serve:production"
+              "devServerTarget": "stt-frontend:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "hsf-frontend-angular"
+  "defaultProject": "stt-frontend"
 }
