@@ -14,7 +14,8 @@ class AudioSnippet {
 })
 export class AudiorequestComponent implements OnInit {
 
-    name = '';
+    script = '';
+    progress = 'Ready';
 
     audioFormControl = new FormControl('', [
         Validators.required,
@@ -36,7 +37,7 @@ export class AudiorequestComponent implements OnInit {
     processFile(audioInput: any) {
         const file: File = audioInput.files[0];
         const reader = new FileReader();
-        this.name = 'start';
+        this.progress = 'start';
 
         reader.addEventListener('load', (event: any) => {
 
@@ -44,7 +45,8 @@ export class AudiorequestComponent implements OnInit {
 
             this.audioService.uploadFile(this.selectedFile.file).subscribe(
                 (res) => {
-                    this.name = res.script;
+                    this.script = res.script;
+                    this.progress = 'Completed';
                 },
                 (err) => {
                     console.log(err);

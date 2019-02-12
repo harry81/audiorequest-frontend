@@ -1,12 +1,8 @@
 <label class="audio-upload-container btn btn-bwm">
-  <span>Select Audio</span>
   <input #audioInput
          type="file" accept="audio/*"
          (change)="processFile(audioInput)">
 </label>
 
-<p>Value2: {{ name }}</p>
-
-<p>
-  audiorequest works!
-</p>
+<p> {{ progress }}</p>
+<textarea style="width:100%">{{ script }}</textarea>
