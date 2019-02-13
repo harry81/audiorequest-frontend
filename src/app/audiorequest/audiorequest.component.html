@@ -1,8 +1,38 @@
-<label class="audio-upload-container btn btn-bwm">
-  <input #audioInput
-         type="file" accept="audio/*"
-         (change)="processFile(audioInput)">
-</label>
+<mat-toolbar color="primary">
+  <span>Application Title</span>
 
-<p> {{ progress }}</p>
-<textarea style="width:100%">{{ script }}</textarea>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+
+  <span>Right Aligned Text</span>
+</mat-toolbar>
+
+
+
+<h2>녹음 파일을 텍스트로 변환 </h2>
+
+<mat-list>
+  <mat-list-item>
+    <button matButton mat-button color="primary">
+      <label for="fileToUpload">파일추가</label>
+    </button>
+    <input id="fileToUpload" type="file" style="display:none;" (change)="uploadFile($event)"> {{ progress }}
+    <br/>
+    <audio controls src={{path}} [hidden]="audiofile ? false : true">
+    </audio>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <button matButton type="button" (click)="transcribe()"> 변환 </button>
+    <textarea rows="10"  cols="10" style="width:100%;height:100%">{{ script }}</textarea>
+  </mat-list-item>
+  <mat-list-item>
+    <input #email
+           (keyup.enter)="notify(email.value)"
+           (blur)="notify(email.value); email.value='' ">
+
+    <button mat-button color="warn" (click)="notify(email.value)">공유</button>
+
+  </mat-list-item>
+
+</mat-list>

@@ -5,25 +5,31 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {MatButtonModule, MatCheckboxModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule} from '@angular/material';
+import {MatToolbarModule} from '@angular/material/toolbar';
+
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 
 import { AudiorequestComponent } from './audiorequest/audiorequest.component';
+import { IntroComponent } from './intro/intro.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        AudiorequestComponent
+        AudiorequestComponent,
+        IntroComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        MatButtonModule, MatCheckboxModule, MatInputModule,
+        NgbModule,
+        MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule, MatToolbarModule,
         FormsModule, ReactiveFormsModule
     ],
     providers: [],

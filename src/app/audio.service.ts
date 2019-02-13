@@ -17,9 +17,20 @@ export class AudioService {
 
     public uploadFile(audio: File): Observable<any> {
         const formData = new FormData();
-
         formData.append('audio', audio);
 
         return this.httpClient.post(this.api_path + '/stt/', formData);
+    }
+
+    public transcribe(id: string): Observable<any> {
+        const url = this.api_path + '/stt/' + id + '/transcribe/';
+        return this.httpClient.patch(url, '');
+    }
+
+    public notify(id: string, email: string): Observable<any> {
+        const formData = new FormData();
+        formData.append('email', email);
+        const url = this.api_path + '/stt/' + id + '/notify/';
+        return this.httpClient.patch(url, formData);
     }
 }

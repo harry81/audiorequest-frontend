@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormControl, Validators} from '@angular/forms';
+import { NgForm, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AudioService } from '../audio.service';
 
 
@@ -15,27 +15,50 @@ class AudioSnippet {
 export class AudiorequestComponent implements OnInit {
 
     script = '';
+    isSelected = false;
+    audiofile = '';
+    path = '';
     progress = 'Ready';
+    stt_id = '';
+    email = '';
 
-    audioFormControl = new FormControl('', [
-        Validators.required,
-        Validators.email,
-    ]);
+    audioForm = new FormGroup({
+        audiofile: new FormControl('', [Validators.required, ]),
+        email: new FormControl('', [Validators.required, Validators.email, ])
+    });
 
-    constructor(private audioService: AudioService){
-
-    }
+    constructor(private audioService: AudioService){ }
 
     selectedFile: AudioSnippet;
 
     onSubmit(f: NgForm) {
         console.log(f.value);
-        console.log(f);
-        console.log('audioform', this.audioFormControl.value);
+        console.log('audioform', this.audioForm);
     }
 
-    processFile(audioInput: any) {
-        const file: File = audioInput.files[0];
+    notify(email) {
+        console.log('email:' + email);
+        this.audioService.notify(this.stt_id, email).subscribe(
+            (res) => {
+                this.script = res.script;
+            });
+    }
+
+    transcribe() {
+        console.log(this.stt_id);
+        this.audioService.transcribe(this.stt_id).subscribe(
+            (res) => {
+                this.script = res.script;
+            });
+    }
+
+    uploadFile($event) {
+        this.audiofile = $event.target.files[0];
+        if ($event.target.files.length <= 1) {
+            return 0;
+        }
+
+        const file: File = $event.target.files[0];
         const reader = new FileReader();
         this.progress = 'start';
 
@@ -45,8 +68,10 @@ export class AudiorequestComponent implements OnInit {
 
             this.audioService.uploadFile(this.selectedFile.file).subscribe(
                 (res) => {
-                    this.script = res.script;
-                    this.progress = 'Completed';
+                    this.path = res.path;
+                    this.stt_id = res.id;
+                    // this.script = res.script;
+                    this.progress = 'uploaded';
                 },
                 (err) => {
                     console.log(err);
