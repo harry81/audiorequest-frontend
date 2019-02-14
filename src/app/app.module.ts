@@ -5,7 +5,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatInputModule,
+        MatListModule, MatMenuModule, MatIconModule, MatCardModule, MatGridListModule} from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -29,7 +30,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         BrowserAnimationsModule,
         HttpClientModule,
         NgbModule,
-        MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule, MatToolbarModule,
+        MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule, MatToolbarModule, MatMenuModule, MatIconModule, MatCardModule, MatGridListModule,
         FormsModule, ReactiveFormsModule
     ],
     providers: [],

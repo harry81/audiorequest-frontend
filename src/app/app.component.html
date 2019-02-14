@@ -1,14 +1,15 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Hoodpub STT
-  </h1>
+<div>
+  <mat-toolbar color="primary">
+    <span>Hoodpub STT</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button [mat-menu-trigger-for]="menu">
+      <mat-icon class="toolbar-icon">more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item [routerLink] ="['/']">Home</button>
+    <button mat-menu-item [routerLink] ="['/ar']">Audio Request</button>
+  </mat-menu>
 </div>
-
-<nav>
-  <a routerLink="/">intro</a>
-  <br/>
-  <a routerLink="/ar">ar</a>
-</nav>
 
 <router-outlet></router-outlet>

@@ -54,7 +54,7 @@ export class AudiorequestComponent implements OnInit {
 
     uploadFile($event) {
         this.audiofile = $event.target.files[0];
-        if ($event.target.files.length <= 1) {
+        if ($event.target.files.length < 1) {
             return 0;
         }
 

@@ -1,38 +1,42 @@
-<mat-toolbar color="primary">
-  <span>Application Title</span>
-
-  <!-- This fills the remaining space of the current row -->
-  <span class="example-fill-remaining-space"></span>
-
-  <span>Right Aligned Text</span>
-</mat-toolbar>
-
-
-
-<h2>녹음 파일을 텍스트로 변환 </h2>
-
 <mat-list>
   <mat-list-item>
-    <button matButton mat-button color="primary">
-      <label for="fileToUpload">파일추가</label>
+    <h2>녹음 파일을 텍스트로 변환 </h2>
+  </mat-list-item>
+  <mat-list-item>
+    <button matButton mat-raised-button color="primary">
+      <label for="fileToUpload" class="md-button md-raised md-primary">파일추가</label>
     </button>
-    <input id="fileToUpload" type="file" style="display:none;" (change)="uploadFile($event)"> {{ progress }}
-    <br/>
-    <audio controls src={{path}} [hidden]="audiofile ? false : true">
-    </audio>
+    <input id="fileToUpload" type="file" style="display:none;" (change)="uploadFile($event)">
   </mat-list-item>
-  <mat-divider></mat-divider>
-  <mat-list-item>
-    <button matButton type="button" (click)="transcribe()"> 변환 </button>
-    <textarea rows="10"  cols="10" style="width:100%;height:100%">{{ script }}</textarea>
-  </mat-list-item>
-  <mat-list-item>
-    <input #email
-           (keyup.enter)="notify(email.value)"
-           (blur)="notify(email.value); email.value='' ">
-
-    <button mat-button color="warn" (click)="notify(email.value)">공유</button>
-
-  </mat-list-item>
-
 </mat-list>
+
+<div [hidden]="progress == 'uploaded' ? false : true">
+  <mat-list>
+    <mat-list-item >
+      <div >
+        <audio controls src={{path}}>
+        </audio>
+      </div>
+    </mat-list-item>
+    <mat-list-item>
+      <div>
+        <button matButton mat-raised-button color="primary" (click)="transcribe()"> 변환 </button>
+      </div>
+    </mat-list-item>
+    <mat-list-item style="height:100%">
+      <div>
+        <textarea rows="5" cols="35">{{ script }}</textarea>
+      </div>
+    </mat-list-item>
+
+    <mat-list-item>
+      <input #email
+             (keyup.enter)="notify(email.value)"
+             (blur)="notify(email.value); email.value='' ">
+    </mat-list-item>
+
+    <mat-list-item>
+      <button mat-raised-button color="primary" (click)="notify(email.value)">공유</button>
+    </mat-list-item>
+  </mat-list>
+</div>
