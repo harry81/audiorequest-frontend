@@ -23,6 +23,7 @@ export class AudiorequestComponent implements OnInit {
     progress = 'Ready';
     stt_id = '';
     email = '';
+    response_notify = '';
 
     audioForm = new FormGroup({
         audiofile: new FormControl('', [Validators.required, ]),
@@ -38,17 +39,6 @@ export class AudiorequestComponent implements OnInit {
         console.log('audioform', this.audioForm);
     }
 
-    openDialog(): void {
-        const dialogRef = this.dialog.open(NotifyDialogComponent, {
-            width: '250px',
-            data: {animal: 'chharry@gmail.com'}
-        });
-
-        dialogRef.afterClosed().subscribe(email => {
-            this.notify(email);
-        });
-    }
-
     notify() {
         const dialogRef = this.dialog.open(NotifyDialogComponent, {
             width: '250px',
@@ -59,7 +49,7 @@ export class AudiorequestComponent implements OnInit {
             console.log('email:' + email);
 
             this.audioService.notify(this.stt_id, email).subscribe((res) => {
-                this.script = res.script;
+                this.response_notify = res.message;
             });
         });
     }
@@ -90,8 +80,8 @@ export class AudiorequestComponent implements OnInit {
                 (res) => {
                     this.path = res.path;
                     this.stt_id = res.id;
-                    // this.script = res.script;
                     this.progress = 'uploaded';
+                    this.response_notify = '';
                 },
                 (err) => {
                     console.log(err);

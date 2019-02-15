@@ -1,36 +1,25 @@
-<mat-list>
-  <mat-list-item>
+<mat-grid-list cols="2" rowHeight="100px">
+  <mat-grid-tile [colspan]="2" [rowspan]="1">
     <h3 matLin> 음성을 문자로 변환 </h3>
-  </mat-list-item>
-  <mat-list-item>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1">
     <button matButton mat-raised-button color="primary">
-      <label for="fileToUpload" class="md-button md-raised md-primary">파일추가</label>
+      <label for="fileToUpload">파일추가</label>
     </button>
     <input id="fileToUpload" type="file" style="display:none;" (change)="uploadFile($event)">
-  </mat-list-item>
-</mat-list>
-
-<div [hidden]="progress == 'uploaded' ? false : true">
-  <mat-list>
-    <mat-list-item >
-      <div >
-        <audio controls src={{path}}>
-        </audio>
-      </div>
-    </mat-list-item>
-    <mat-list-item>
-      <div>
-        <button matButton mat-raised-button color="primary" (click)="transcribe()"> 변환 </button>
-      </div>
-    </mat-list-item>
-    <mat-list-item style="height:100%">
-      <div>
-        <textarea rows="5" cols="35">{{ script }}</textarea>
-      </div>
-    </mat-list-item>
-
-    <mat-list-item>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1">
+    <span [hidden]="progress == 'uploaded' ? false : true">
       <button mat-raised-button color="primary" (click)="notify()">공유</button>
-    </mat-list-item>
-  </mat-list>
-</div>
+    </span>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2">
+    <div [hidden]="progress == 'uploaded' ? false : true">
+      <audio controls src={{path}}>
+      </audio>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2">
+    {{ response_notify }}
+  </mat-grid-tile>
+</mat-grid-list>
