@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AudioService } from '../audio.service';
+import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 
 class AudioSnippet {
@@ -27,7 +29,7 @@ export class AudiorequestComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email, ])
     });
 
-    constructor(private audioService: AudioService){ }
+    constructor(private audioService: AudioService, public dialog: MatDialog){ }
 
     selectedFile: AudioSnippet;
 
@@ -36,12 +38,30 @@ export class AudiorequestComponent implements OnInit {
         console.log('audioform', this.audioForm);
     }
 
-    notify(email) {
-        console.log('email:' + email);
-        this.audioService.notify(this.stt_id, email).subscribe(
-            (res) => {
+    openDialog(): void {
+        const dialogRef = this.dialog.open(NotifyDialogComponent, {
+            width: '250px',
+            data: {animal: 'chharry@gmail.com'}
+        });
+
+        dialogRef.afterClosed().subscribe(email => {
+            this.notify(email);
+        });
+    }
+
+    notify() {
+        const dialogRef = this.dialog.open(NotifyDialogComponent, {
+            width: '250px',
+            data: {animal: 'chharry@gmail.com'}
+        });
+
+        dialogRef.afterClosed().subscribe(email => {
+            console.log('email:' + email);
+
+            this.audioService.notify(this.stt_id, email).subscribe((res) => {
                 this.script = res.script;
             });
+        });
     }
 
     transcribe() {

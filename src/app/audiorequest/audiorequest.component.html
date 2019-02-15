@@ -1,6 +1,6 @@
 <mat-list>
   <mat-list-item>
-    <h2>녹음 파일을 텍스트로 변환 </h2>
+    <h3 matLin> 음성을 문자로 변환 </h3>
   </mat-list-item>
   <mat-list-item>
     <button matButton mat-raised-button color="primary">
@@ -30,13 +30,7 @@
     </mat-list-item>
 
     <mat-list-item>
-      <input #email
-             (keyup.enter)="notify(email.value)"
-             (blur)="notify(email.value); email.value='' ">
-    </mat-list-item>
-
-    <mat-list-item>
-      <button mat-raised-button color="primary" (click)="notify(email.value)">공유</button>
+      <button mat-raised-button color="primary" (click)="notify()">공유</button>
     </mat-list-item>
   </mat-list>
 </div>

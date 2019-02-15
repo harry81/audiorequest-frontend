@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Email로 공유하기</h1>
+<div mat-dialog-content>
+  <p>Email</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">닫기</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>전송</button>
+</div>
