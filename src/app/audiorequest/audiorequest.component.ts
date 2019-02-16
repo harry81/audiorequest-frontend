@@ -4,7 +4,13 @@ import { AudioService } from '../audio.service';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+/* Status
+   - ready
+   - wip
+   - uploaded
+   - sented
 
+ */
 class AudioSnippet {
     constructor(public src: string, public file: File) {}
 }
@@ -20,7 +26,7 @@ export class AudiorequestComponent implements OnInit {
     isSelected = false;
     audiofile = '';
     path = '';
-    progress = 'Ready';
+    progress = 'ready';
     stt_id = '';
     email = '';
     response_notify = '';
@@ -46,11 +52,13 @@ export class AudiorequestComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(email => {
-            console.log('email:' + email);
-
-            this.audioService.notify(this.stt_id, email).subscribe((res) => {
-                this.response_notify = res.message;
-            });
+            this.progress = 'wip';
+            if (email) {
+                this.audioService.notify(this.stt_id, email).subscribe((res) => {
+                    this.response_notify = res.message;
+                    this.progress = 'sent';
+                });
+            }
         });
     }
 
@@ -70,7 +78,7 @@ export class AudiorequestComponent implements OnInit {
 
         const file: File = $event.target.files[0];
         const reader = new FileReader();
-        this.progress = 'start';
+        this.progress = 'wip';
 
         reader.addEventListener('load', (event: any) => {
 
