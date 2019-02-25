@@ -6,7 +6,7 @@
     <button matButton mat-raised-button color="primary">
       <label for="fileToUpload">선택</label>
     </button>
-    <input id="fileToUpload" type="file" style="display:none;" (change)="uploadFile($event)">
+    <input id="fileToUpload" type="file" style="display:none;" accept=".wav,.mp3,.flac" (change)="uploadFile($event)">
 
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1">
