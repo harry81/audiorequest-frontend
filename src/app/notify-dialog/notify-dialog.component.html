@@ -1,11 +1,20 @@
 <h1 mat-dialog-title>Email로 공유하기</h1>
 <div mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="Languages" [(ngModel)]="data.selectedlanguage" name="language">
+      <mat-option *ngFor="let language of languages" [value]="language.value">
+        {{language.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <p>Email</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
+    <input matInput [(ngModel)]="data.email">
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">닫기</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>전송</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>전송</button>
 </div>

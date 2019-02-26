@@ -16,6 +16,7 @@ import {MatButtonModule, MatCheckboxModule, MatInputModule,
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -50,7 +51,7 @@ export class SentryErrorHandler implements ErrorHandler {
         BrowserAnimationsModule,
         HttpClientModule,
         NgbModule,
-        MatProgressBarModule, MatProgressSpinnerModule,
+        MatProgressBarModule, MatProgressSpinnerModule, MatSelectModule,
         MatButtonModule, MatCheckboxModule, MatInputModule, MatListModule, MatToolbarModule,
         MatMenuModule, MatIconModule, MatCardModule, MatGridListModule, MatDialogModule,
         FormsModule, ReactiveFormsModule

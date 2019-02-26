@@ -48,14 +48,17 @@ export class AudiorequestComponent implements OnInit {
     notify() {
         const dialogRef = this.dialog.open(NotifyDialogComponent, {
             width: '250px',
-            data: {animal: 'chharry@gmail.com'}
+            data: { email: 'chharry@gmail.com',
+                    selectedlanguage: 'ko-KR'}
         });
 
-        dialogRef.afterClosed().subscribe(email => {
+        dialogRef.afterClosed().subscribe(res => {
             this.progress = 'wip';
-            if (email) {
-                this.audioService.notify(this.stt_id, email).subscribe((res) => {
-                    this.response_notify = res.message;
+            console.log('data ', res);
+
+            if (res) {
+                this.audioService.notify(this.stt_id, res).subscribe((response) => {
+                    this.response_notify = response.message;
                     this.progress = 'sent';
                 });
             }
