@@ -30,7 +30,7 @@ export class AudioService {
     public notify(id: string, data: any): Observable<any> {
         const formData = new FormData();
         formData.append('email', data.email);
-        formData.append('selectedlanguage', data.selectedlanguage);
+        formData.append('language', data.language);
 
         const url = this.api_path + '/stt/' + id + '/notify/';
         return this.httpClient.patch(url, formData);
