@@ -9,6 +9,8 @@ import { AudioService } from '../audio.service';
     styleUrls: ['./ar-detail.component.scss']
 })
 export class ArDetailComponent implements OnInit {
+    uuid: string;
+    stt: any;
 
     constructor(private audioService: AudioService, private route: ActivatedRoute) {
         this.uuid = this.route.snapshot.paramMap.get("uuid");

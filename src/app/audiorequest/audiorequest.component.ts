@@ -53,10 +53,8 @@ export class AudiorequestComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe(res => {
-            this.progress = 'wip';
-            console.log('data ', res);
-
             if (res) {
+                this.progress = 'wip';
                 this.audioService.notify(this.stt_id, res).subscribe((response) => {
                     this.response_notify = response.message;
                     this.progress = 'sent';
@@ -74,6 +72,8 @@ export class AudiorequestComponent implements OnInit {
     }
 
     uploadFile($event) {
+        this.clean_page();
+
         this.audiofile = $event.target.files[0];
         if ($event.target.files.length < 1) {
             return 0;
@@ -100,6 +100,10 @@ export class AudiorequestComponent implements OnInit {
         });
 
         reader.readAsDataURL(file);
+    }
+
+    clean_page() {
+        this.response_notify = '';
     }
     ngOnInit() {
     }

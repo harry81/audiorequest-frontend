@@ -26,6 +26,7 @@ export class NotifyDialogComponent {
         {value: 'de-DE', viewValue: '독일'},
         {value: 'cmn-Hans-HK', viewValue: '중국어, 북경어(간체, 홍콩)'},
         {value: 'ru-RU', viewValue: '러시아어'},
+        {value: 'es-ES', viewValue: '스페인어'},
         {value: 'ja-JP', viewValue: '일본어'},
     ];
     language: string;
