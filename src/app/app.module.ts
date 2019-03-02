@@ -27,6 +27,7 @@ import { IntroComponent } from './intro/intro.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
+import { ArDetailComponent } from './ar-detail/ar-detail.component';
 
 
 @Injectable()
@@ -43,7 +44,8 @@ export class SentryErrorHandler implements ErrorHandler {
         AppComponent,
         AudiorequestComponent,
         IntroComponent,
-        NotifyDialogComponent
+        NotifyDialogComponent,
+        ArDetailComponent
     ],
     imports: [
         BrowserModule,

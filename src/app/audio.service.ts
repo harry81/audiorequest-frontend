@@ -27,6 +27,11 @@ export class AudioService {
         return this.httpClient.patch(url, '');
     }
 
+    public get_stt(id: string): Observable<any> {
+        const url = this.api_path + '/stt/' + id + '/';
+        return this.httpClient.get(url);
+    }
+
     public notify(id: string, data: any): Observable<any> {
         const formData = new FormData();
         formData.append('email', data.email);

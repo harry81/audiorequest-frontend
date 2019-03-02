@@ -1,0 +1,21 @@
+<mat-card class="example-card" *ngIf="stt">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Shiba Inu</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <mat-grid-list cols="1" rowHeight="50px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        {{stt.script}}
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        {{stt.lang_code}} / {{stt.created_at | date}}
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-menu-item [routerLink] ="['/ar']">녹음하기</button>
+  </mat-card-actions>
+</mat-card>
