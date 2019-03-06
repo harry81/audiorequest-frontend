@@ -4,15 +4,19 @@
   </mat-grid-tile>
   <mat-grid-tile [colspan]="1">
     <button matButton mat-raised-button color="primary">
-      <label for="fileToUpload">선택</label>
+      <label for="fileToUpload">녹음전송</label>
     </button>
     <input id="fileToUpload" type="file" style="display:none;" accept="audio/*" (change)="uploadFile($event)">
-
   </mat-grid-tile>
+
   <mat-grid-tile [colspan]="1">
-    <span [hidden]="progress == 'uploaded' ? false : true">
-      <button mat-raised-button color="primary" (click)="notify()">변환</button>
+
+    <span [hidden]="progress == 'uploaded' ? true : false">
+      <button matButton mat-raised-button (click)="uploadFile($event)">
+        <label for="sampleTest">샘플음성</label>
+      </button>
     </span>
+
   </mat-grid-tile>
   <mat-grid-tile [colspan]="2">
     <mat-spinner [diameter] ="40" *ngIf="progress == 'wip'"></mat-spinner>
@@ -25,4 +29,11 @@
       {{ response_notify }}
     </div>
   </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2">
+    <span [hidden]="progress == 'uploaded' ? false : true">
+      <button mat-raised-button color="primary" (click)="notify()">변환</button>
+    </span>
+  </mat-grid-tile>
+
 </mat-grid-list>

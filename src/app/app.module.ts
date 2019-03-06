@@ -5,7 +5,7 @@ import { NgModule, ErrorHandler, Injectable } from "@angular/core";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import * as Sentry from "@sentry/browser";
+import * as Sentry from '@sentry/browser';
 
 Sentry.init({
   dsn: "https://3305151b8ee54156ab7b82c0bddd6735@sentry.io/1395538"
@@ -17,7 +17,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
-
 
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';

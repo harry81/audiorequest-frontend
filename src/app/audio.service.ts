@@ -17,7 +17,10 @@ export class AudioService {
 
     public uploadFile(audio: File): Observable<any> {
         const formData = new FormData();
-        formData.append('audio', audio);
+
+        if (audio) {
+            formData.append('audio', audio);
+        }
 
         return this.httpClient.post(this.api_path + '/stt/', formData);
     }

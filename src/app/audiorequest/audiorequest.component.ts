@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router'; // import Router and NavigationEnd
 import { NgForm, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AudioService } from '../audio.service';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { GoogleAnalyticsService} from '../ga.service';
 
 /* Status
    - ready
@@ -10,10 +12,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
    - uploaded
    - sented
 
- */
-class AudioSnippet {
-    constructor(public src: string, public file: File) {}
-}
+*/
+
+declare let gtag: Function; // Declare gtag as a function
+
 
 @Component({
     selector: 'app-audiorequest',
@@ -36,16 +38,15 @@ export class AudiorequestComponent implements OnInit {
         email: new FormControl('', [Validators.required, Validators.email, ])
     });
 
-    constructor(private audioService: AudioService, public dialog: MatDialog){ }
+    constructor(private audioService: AudioService,
+                public dialog: MatDialog,
+                public googleAnalyticsService: GoogleAnalyticsService) {
 
-    selectedFile: AudioSnippet;
-
-    onSubmit(f: NgForm) {
-        console.log(f.value);
-        console.log('audioform', this.audioForm);
     }
 
     notify() {
+        this.googleAnalyticsService.eventEmitter('audio', 'notify');
+
         const dialogRef = this.dialog.open(NotifyDialogComponent, {
             width: '250px',
             data: { email: 'chharry@gmail.com',
@@ -54,6 +55,8 @@ export class AudiorequestComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(res => {
             if (res) {
+                this.googleAnalyticsService.eventEmitter('audio', 'notify_ready');
+
                 this.progress = 'wip';
                 this.audioService.notify(this.stt_id, res).subscribe((response) => {
                     this.response_notify = response.message;
@@ -64,7 +67,6 @@ export class AudiorequestComponent implements OnInit {
     }
 
     transcribe() {
-        console.log(this.stt_id);
         this.audioService.transcribe(this.stt_id).subscribe(
             (res) => {
                 this.script = res.script;
@@ -72,34 +74,27 @@ export class AudiorequestComponent implements OnInit {
     }
 
     uploadFile($event) {
+        this.googleAnalyticsService.eventEmitter('audio', 'uploadFile');
         this.clean_page();
 
-        this.audiofile = $event.target.files[0];
-        if ($event.target.files.length < 1) {
-            return 0;
-        }
-
-        const file: File = $event.target.files[0];
         const reader = new FileReader();
+        let file: File;
         this.progress = 'wip';
 
-        reader.addEventListener('load', (event: any) => {
+        if ($event.target.files) {
+            file = $event.target.files[0];
+        }
 
-            this.selectedFile = new AudioSnippet(event.target.result, file);
-
-            this.audioService.uploadFile(this.selectedFile.file).subscribe(
-                (res) => {
-                    this.path = res.path;
-                    this.stt_id = res.id;
-                    this.progress = 'uploaded';
-                    this.response_notify = '';
-                },
-                (err) => {
-                    console.log(err);
-                });
-        });
-
-        reader.readAsDataURL(file);
+        this.audioService.uploadFile(file).subscribe(
+            (res) => {
+                this.path = res.path;
+                this.stt_id = res.id;
+                this.progress = 'uploaded';
+                this.response_notify = '';
+            },
+            (err) => {
+                console.log(err);
+            });
     }
 
     clean_page() {
