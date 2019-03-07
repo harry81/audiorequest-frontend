@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, NavigationEnd} from '@angular/router'; // import Router and NavigationEnd
+import {Router, NavigationEnd} from '@angular/router';
 import { NgForm, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AudioService } from '../audio.service';
 import { NotifyDialogComponent } from '../notify-dialog/notify-dialog.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { GoogleAnalyticsService} from '../ga.service';
+
 
 /* Status
    - ready
@@ -40,22 +41,21 @@ export class AudiorequestComponent implements OnInit {
 
     constructor(private audioService: AudioService,
                 public dialog: MatDialog,
-                public googleAnalyticsService: GoogleAnalyticsService) {
+                public ga: GoogleAnalyticsService) {
 
     }
 
     notify() {
-        this.googleAnalyticsService.eventEmitter('audio', 'notify');
+        this.ga.eventEmitter('audio', 'notify');
 
         const dialogRef = this.dialog.open(NotifyDialogComponent, {
             width: '250px',
-            data: { email: 'chharry@gmail.com',
-                    selectedlanguage: 'ko-KR'}
+            data: { email: 'chharry@gmail.com', language: 'ko-KR'}
         });
 
         dialogRef.afterClosed().subscribe(res => {
             if (res) {
-                this.googleAnalyticsService.eventEmitter('audio', 'notify_ready');
+                this.ga.eventEmitter('audio', 'notify_ready');
 
                 this.progress = 'wip';
                 this.audioService.notify(this.stt_id, res).subscribe((response) => {
@@ -74,7 +74,7 @@ export class AudiorequestComponent implements OnInit {
     }
 
     uploadFile($event) {
-        this.googleAnalyticsService.eventEmitter('audio', 'uploadFile');
+        this.ga.eventEmitter('audio', 'uploadFile');
         this.clean_page();
 
         const reader = new FileReader();
@@ -93,7 +93,9 @@ export class AudiorequestComponent implements OnInit {
                 this.response_notify = '';
             },
             (err) => {
-                console.log(err);
+                console.log(err.error);
+                this.response_notify = err.error.message;
+                this.progress = 'failed';
             });
     }
 
