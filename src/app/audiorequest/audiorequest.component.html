@@ -2,19 +2,14 @@
   <mat-grid-tile [colspan]="2" [rowspan]="1">
     <h3 > 음성을 문자로 변환 </h3>
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="1">
+  <mat-grid-tile [colspan]="2">
     <button matButton mat-raised-button color="primary">
       <label for="fileToUpload">녹음전송</label>
     </button>
     <input id="fileToUpload" type="file" style="display:none;" accept="audio/*" (change)="uploadFile($event)">
-  </mat-grid-tile>
-
-  <mat-grid-tile [colspan]="1">
-
-    <span [hidden]="progress == 'uploaded' ? true : false">
-      <button matButton mat-raised-button (click)="uploadFile($event)">
-        <label for="sampleTest">샘플음성</label>
-      </button>
+    <br/>
+    <span>
+      <button matButton mat-button color="primary" (click)="uploadFile($event)">샘플음성</button>
     </span>
 
   </mat-grid-tile>
@@ -32,7 +27,7 @@
 
   <mat-grid-tile [colspan]="2">
     <span [hidden]="progress == 'uploaded' ? false : true">
-      <button mat-raised-button color="primary" (click)="notify()">변환</button>
+      <button mat-raised-button color="primary" (click)="notify()">변  환</button>
     </span>
   </mat-grid-tile>
 
