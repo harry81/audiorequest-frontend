@@ -1,33 +1,40 @@
-<mat-grid-list cols="2" rowHeight="100px">
+<mat-grid-list cols="2" rowHeight="75px">
   <mat-grid-tile [colspan]="2" [rowspan]="1">
     <h3 > 음성을 문자로 변환 </h3>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="2">
     <button matButton mat-raised-button color="primary">
-      <label for="fileToUpload">녹음전송</label>
+      <label for="fileToUpload">녹음</label>
     </button>
-    <input id="fileToUpload" type="file" style="display:none;" accept="audio/*" (change)="uploadFile($event)">
+    <input id="fileToUpload" type="file" style="display:none;" accept="audio/*" (change)="chooseFile($event)">
     <br/>
-    <span>
-      <button matButton mat-button color="primary" (click)="uploadFile($event)">샘플음성</button>
-    </span>
+    <!-- <span> -->
+    <!--   <button matButton mat-button color="primary" (click)="uploadFile($event)">샘플음성</button> -->
+    <!-- </span> -->
 
   </mat-grid-tile>
+
   <mat-grid-tile [colspan]="2">
     <mat-spinner [diameter] ="40" *ngIf="progress == 'wip'"></mat-spinner>
+  </mat-grid-tile>
 
-    <div [hidden]="progress == 'uploaded' ? false : true">
-      <audio controls src={{path}}>
-      </audio>
-    </div>
+  <mat-grid-tile [colspan]="2">
     <div>
-      {{ response_notify }}
+      <audio controls [src] ="path">
+      </audio>
     </div>
   </mat-grid-tile>
 
   <mat-grid-tile [colspan]="2">
-    <span [hidden]="progress == 'uploaded' ? false : true">
-      <button mat-raised-button color="primary" (click)="notify()">변  환</button>
+    <span>
+      {{ response_notify }}
+    </span>
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2">
+    <!-- [hidden]="progress == 'selected' ? false : true" -->
+    <span >
+      <button mat-raised-button color="primary" (click)="request_transcribe()">변  환</button>
     </span>
   </mat-grid-tile>
 
