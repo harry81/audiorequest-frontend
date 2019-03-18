@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { MatGridListModule, MatDialogModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AudiorequestComponent } from './audiorequest.component';
 
 describe('AudiorequestComponent', () => {
@@ -8,7 +10,8 @@ describe('AudiorequestComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AudiorequestComponent ]
+        declarations: [ AudiorequestComponent ],
+        imports: [HttpClientTestingModule, MatGridListModule, MatProgressSpinnerModule, MatDialogModule]
     })
     .compileComponents();
   }));

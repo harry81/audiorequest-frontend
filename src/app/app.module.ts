@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, ErrorHandler, Injectable } from "@angular/core";
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({
-  dsn: "https://3305151b8ee54156ab7b82c0bddd6735@sentry.io/1395538"
+  dsn: 'https://3305151b8ee54156ab7b82c0bddd6735@sentry.io/1395538'
 });
 
 import {MatButtonModule, MatCheckboxModule, MatInputModule,
